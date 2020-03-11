@@ -1,4 +1,5 @@
 function Prom=promedioColor(TT)
+##  TT=im2double(TT);
   [m,n,z]=size(TT);
   Prom=zeros(1,1,3);
   for i=1:n

@@ -1,11 +1,10 @@
-
 A=imread('imagen1.jpg');
-Y=promedio(A);
+Y=imread('imagenBi.jpg');
+T=imread('imagenProm.jpg');
+##A=im2double(A);
+##Y=im2double(Y);
+##T=im2double(T);
 
-subplot(1,2,1)
-imshow(A)
-title('Imagen original')
-
-subplot(1,2,2)
-imshow(Y)
-title('Imagen rellenada')
+ImNorm=norma(A)
+ImProm=norma(T)
+ImBile=norma(Y)

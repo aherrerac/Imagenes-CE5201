@@ -7,7 +7,7 @@ function Y=promedio(A)
       r=A(i,j,1);
       g=A(i,j,2);
       b=A(i,j,3);
-      if or(g<=0.009, b<=0.009, r<=0.009)
+      if or(g<=0.09, b<=0.09, r<=0.09)
         %esquinas
         if and(i==1,j==1)
           %obtener 3 pixeles
