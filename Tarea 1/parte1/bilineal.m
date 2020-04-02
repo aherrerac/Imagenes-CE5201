@@ -22,21 +22,14 @@ function Y=bilineal(A)
           %obtener 3 pixeles
           tt=[A(i-1,j+1,:)];
         %froteras de la imagen
-        elseif (i==1)
+        elseif and(or(i==1,i==xmax), or(j!=1,j!=ymax))
           %obtener 5 pixeles
-          tt=[A(i+1,j-1,:) A(i+1,j+1,:)];
-        elseif (i==xmax)
-          %obtener 5 pixeles
-          tt=[A(i-1,j-1,:) A(i-1,j+1,:)];
-        elseif (j==1)
-          %obtener 5 pixeles
-          tt=[A(i-1,j+1,:) A(i+1,j+1,:)];
-        elseif (j==ymax)
-          %obtener 5 pixeles
-          tt=[A(i-1,j-1,:) A(i+1,j-1,:)];
+          tt=[A(i,j-1,:) A(i,j+1,:)];
+        elseif and(or(j==1,j==ymax), or(i!=1,i!=xmax))
+          tt=[A(i-1,j,:) A(i+1,j,:)];
         else
           %obtener 8 pixeles
-          tt=[A(i-1,j-1,:) A(i+1,j-1,:) A(i+1,j+1,:) A(i-1,j+1,:)];
+          tt=[A(i,j-1,:) A(i,j+1,:)];
         endif
         Y(i,j,:)= promedioColor(tt);
       else 
