@@ -11,18 +11,20 @@ e0 = 50;
 e1 = 15;
 
 %intentando buscar match con caras de carpeta a comparar
-testImgs=zeros(M,N,I);
-for i=1:I
-  tt="";
-  %formamos el nombre del archivo
-  tt=strcat('Comparar\',int2str(i),'_10.png');
-  %insertando las imagenes a las imagenes de prueba
-  testImgs(:,:,I)=im2double(imread(tt));
-endfor
+testImgs=im2double(imread('Comparar\1_10.png'));
+##testImgs=zeros(M,N,I);
+##for i=1:I
+##  tt="";
+##  %formamos el nombre del archivo
+##  tt=strcat('Comparar\',int2str(i),'_10.png');
+##  %insertando las imagenes a las imagenes de prueba
+##  testImgs(:,:,I)=im2double(imread(tt));
+##endfor
 
-%matriz para los Xs de las imagenes de prueba
-[fila,columna]=size(U(:,:,1:rank(A(:,:,1)))'*(testImgs(:,:,1)-f))
-X=zeros(fila,columna,I);
+##%matriz para los Xs de las imagenes de prueba
+##[fila,columna]=size(U(:,:,1:rank(A(:,:,1)))'*(testImgs(:,:,1)-f))
+[fila,columna]=size(U(:,:,1:rank(A(:,:,1)))'*(testImgs-f))
+X=zeros(fila,columna,1);
 %matriz para los f projection de las imagenes de prueba
 [fila,columna]=size(U(:,:,1:rank(A(:,:,1)))*X(:,:,1))
 fp=zeros(fila,columna);
