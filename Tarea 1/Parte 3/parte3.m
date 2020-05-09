@@ -1,36 +1,5 @@
-f1 = im2double(imread('Database\1_1.png'));
-f2 = im2double(imread('Database\2_1.png'));
-f3 = im2double(imread('Database\3_1.png'));
-f4 = im2double(imread('Database\4_1.png'));
-f5 = im2double(imread('Database\5_1.png'));
-f6 = im2double(imread('Database\6_1.png'));
-f7 = im2double(imread('Database\7_1.png'));
-f8 = im2double(imread('Database\8_1.png'));
-f9 = im2double(imread('Database\9_1.png'));
 
-
-S = [f1 f2 f3 f4 f5 f6 f7 f8 f9 ];
-
-f = (f1 + f2 + f3 + f4 + f5 + f7 + f8 + f9) / 9;
-
-a1 = f1 - f;
-a2 = f2 - f;
-a3 = f3 - f;
-a4 = f4 - f;
-a5 = f5 - f;
-a6 = f6 - f;
-a7 = f7 - f;
-a8 = f8 - f;
-a9 = f9 - f;
-
-
-A = [a1 a2 a3 a4 a5 a6 a7 a8 a9];
-
-[U, E, V] = svd(A);
-
-r = rank(A);
-
-xi = U(:,1:r)' * A ;
+[U,r,xi] = training();
 
 x = U(:,1:r)' * (f1 - f);
 
