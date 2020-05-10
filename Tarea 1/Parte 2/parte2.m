@@ -1,6 +1,6 @@
 clc; clear;
 
-nImage = imread('limpiar.jpg');
+nImage = im2double(imread('limpiar.jpg'));
 
 xfiles = glob('.\original\*.jpg');
 bfiles = glob('.\ruido\*.jpg');
@@ -21,18 +21,34 @@ C = im2double(C);
 
 B = im2double(B);
 
-s = mean(B,2);
+s = rank(B);
 
 [U,S,V] = svd(B); 
 
 Ps = C * V(:,1:s) * V(:,1:s)'; 
 
-r = 400
-
 [Us,Ss,Vs] = svd(Ps);
 
-Pr = Us(:,1:r) * Ss(1:r,1:r) * Vs(:,1:r)'; 
- 
+figure('Name','Image Deblurring SVD');
+
+subplot(1,2,1);
+
+imshow(nImage);
+
+title('Noisy Image');
+
+for r = 1:18:416
+  Pr = Us(:,1:r) * Ss(1:r,1:r) * Vs(:,1:r)'; 
+  Z = Pr * pinv(B);
+  subplot(1,2,2);
+  x = Z * nImage(:);
+  imshow(reshape(x,[64 64]));
+  title(sprintf('Deblur Image, with rank = %d', r));
+  pause(1);
+endfor
+
+
+
 
 
 
