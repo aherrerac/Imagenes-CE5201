@@ -3,17 +3,17 @@ clc;
 
 files = glob('.\Comparar\*.png');
 
-e0 = 50;
-e1 = 10;
+e0 = 10;
+e1 = 11;
 
 for k = 1:40
-  
+     
   image = im2double(imread(char(files(k,1))));
   fi = image(:) -f;
   
   x = U(:,1:r)' * fi;
   
-  ef = ((fi - U(:, 1:r) * x)' * (fi - U(:, 1:r) * x)) ^ 0.5;
+  ef = ((fi - U(:, 1:r) * x)' * (fi - U(:, 1:r) * x)) ^ 0.5
   
   e = zeros(40,1);
   
