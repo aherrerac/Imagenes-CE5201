@@ -1,4 +1,4 @@
-function [U, r, xi,f] =training()
+function [S, U, r, xi, f] =training()
   files = glob('.\Database\*.png');
 
   sampleImage = imread(char(files(1,1)));
@@ -32,9 +32,9 @@ function [U, r, xi,f] =training()
 
   A =  S - f;
 
-  r = rank(A);
+  r = size(A,2);
 
-  [U,S,V] = svd(A);
+  [U,Ss,V] = svd(A);
 
   xi = U(:,1:r)' * A ;
 
