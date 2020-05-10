@@ -6,6 +6,12 @@ files = glob('.\Comparar\*.png');
 e0 = 10;
 e1 = 11;
 
+figure('Name','Mean Image');
+  
+imshow(reshape(f,[112 92]));
+  
+figure('Name','Facial Recognition SVD');
+
 for k = 1:40
      
   image = im2double(imread(char(files(k,1))));
@@ -27,8 +33,11 @@ for k = 1:40
     if val < e0
       subplot(1,2,1);
       imshow(image);
+      title('Face');
+      
       subplot(1,2,2);
       imshow(reshape(S(:,idx),size(image)));
+      title('Similar Mean Face');
       pause(1.5);
     else
        disp('Not know image');
