@@ -1,4 +1,4 @@
-function [U, r, xi] =training()
+function [U, r, xi,f] =training()
   files = glob('.\Database\*.png');
 
   sampleImage = imread(char(files(1,1)));
@@ -37,7 +37,7 @@ function [U, r, xi] =training()
   [U,S,V] = svd(A);
 
   xi = U(:,1:r)' * A ;
-  
+
 endfunction
 
 
