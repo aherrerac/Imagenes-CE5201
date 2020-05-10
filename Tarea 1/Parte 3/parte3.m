@@ -15,6 +15,7 @@ figure('Name','Facial Recognition SVD');
 for k = 1:40
      
   image = im2double(imread(char(files(k,1))));
+  
   fi = image(:) -f;
   
   x = U(:,1:r)' * fi;
@@ -40,7 +41,7 @@ for k = 1:40
       title('Similar Mean Face');
       pause(1.5);
     else
-       disp('Not know image');
+       disp('Not a know image');
     end
   else
     disp('Not a image'); 

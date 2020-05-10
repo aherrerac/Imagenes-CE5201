@@ -1,30 +1,38 @@
-X = imread('original/sat_original8.jpg');
-B = imread('ruido/sat_ruido8.jpg');
+clc; clear;
 
-%True Image
-C = im2double(X); 
-%Noisy images  
+nImage = imread('limpiar.jpg');
+
+xfiles = glob('.\original\*.jpg');
+bfiles = glob('.\ruido\*.jpg');
+
+fsize = length(xfiles);
+
+C = zeros(4096,fsize);
+B = zeros(4096,fsize);
+
+for k = 1:fsize
+  temp = imread(char(xfiles(k,1)));
+  C(:,k) = temp(:);
+  temp = imread(char(bfiles(k,1)));
+  B(:,k) = temp(:);
+endfor
+
+C = im2double(C);
+
 B = im2double(B);
 
-[Ub,Sb,Vb] = svd(B);
+s = mean(B,2);
 
-s = rank(B);
+[U,S,V] = svd(B); 
 
-P = C * Vb(:,1:s) * Vb(:,1:s)';
+Ps = C * V(:,1:s) * V(:,1:s)'; 
 
-[Up,Sp,Vp] = svd(P);
+r = 400
 
-r = 2;
+[Us,Ss,Vs] = svd(Ps);
 
-Ur = Up(:,1:r) ;
-Sr = Sp(1:r,1:r);
-Vr = Vp(:,1:r)'; 
-
-Pr = Ur * Sr * Vr;
-
-Z = Pr * B.';
+Pr = Us(:,1:r) * Ss(1:r,1:r) * Vs(:,1:r)'; 
+ 
 
 
-   
 
-imshow(Pr * B);
