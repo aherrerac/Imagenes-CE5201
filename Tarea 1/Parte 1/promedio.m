@@ -1,28 +1,30 @@
 function Y = promedio(A)
-    %Size
+    %Tamaño de la matriz 
     [m,n,c]= size(A);
-    %New zeros filled matrix
+    %Nueva matriz de ceros con tamano igual al anterior 
     Y = zeros(m,n,c);
-
+    %Se pasa la matriz a formato double
     A = im2double(A);
 
-    %Corner
-    % (1,1)
+    %Se evaluan las esquinas por separado
+    %Esquina (1,1)
     x = 1;
     y = 1;
+     %Comparacion de pixeles negros 
     if or(A(x,y,1)<=0.1,A(x,y,2)<=0.1,A(x,y,3)<=0.1)
+        %Se promedian los 3 pixeles adyacentes
         Y(x,y,1:3) = (A(x,y+1,1:3) + A(x+1,y+1,1:3) + A(x+1,y,1:3))/3;
     else
         Y(x,y,:) = A(x,y,:);
     endif
-    %(1,n)
+    %Esquina(1,n)
     y = n;
     if or(A(x,y,1)<=0.1,A(x,y,2)<=0.1,A(x,y,3)<=0.1)
         Y(x,y,1:3) = (A(x,y-1,1:3) + A(x+1,y-1,1:3) + A(x+1,y,1:3))/3;
     else
         Y(x,y,:) = A(x,y,:);
     endif
-    %(m,1)
+    %Esquina (m,1)
     x = m;
     y = 1;
     if or(A(x,y,1)<=0.1,A(x,y,2)<=0.1,A(x,y,3)<=0.1)
@@ -30,19 +32,19 @@ function Y = promedio(A)
     else
         Y(x,y,:) = A(x,y,:);
     endif
-    %(m,n)
+    %Esquina (m,n)
     y = n;
     if or(A(x,y,1)<=0.1,A(x,y,2)<=0.1,A(x,y,3)<=0.1)
         Y(x,y,1:3) = (A(x,y-1,1:3) + A(x-1,y-1,1:3) + A(x-1,y,1:3))/3;
     else
         Y(x,y,:) = A(x,y,:);
     endif
-
-    %Horizontal 
+     %Calculo de los pixeles horizontales  
     x = 1; 
     for y = 2:n-1
+        %Comparacion de pixeles negros
         if or(A(x,y,1)<=0.1,A(x,y,2)<=0.1,A(x,y,3)<=0.1)
-            % x = 1 a
+            %Se promedian los 5 pixeles adyacentes, x = 1 
             Y(x,y,1:3) = (A(x,y-1,1:3) + A(x+1,y-1,1:3) + A(x+1,y,1:3) + A(x+1,y+1,1:3) + A(x,y+1,1:3))/5;
         else
             Y(x,y,:) = A(x,y,:);
@@ -56,9 +58,10 @@ function Y = promedio(A)
             Y(m,y,:) = A(m,y,:);
         endif
     endfor
-    %Vertical 
+    %Calculo de los pixeles verticales 
     y = 1; 
     for x = 2:m-1
+         %Se promedian los 5 pixeles adyacentes, y = 1;
         if or(A(x,y,1)<=0.1,A(x,y,2)<=0.1,A(x,y,3)<=0.1)
             % y = 1;
             Y(x,y,1:3) = (A(x-1,y,1:3) + A(x-1,y+1,1:3) + A(x,y+1,1:3) + A(x+1,y+1,1:3) + A(x+1,y,1:3))/5;
@@ -67,7 +70,6 @@ function Y = promedio(A)
         endif 
     endfor
     % y = n;
-    % y = 1;
     for x = 2:m-1
         if or(A(x,y,1)<=0.1,A(x,y,2)<=0.1,A(x,y,3)<=0.1)
             Y(x,n,1:3) = (A(x-1,n,1:3) + A(x-1,n-1,1:3) + A(x,n-1,1:3) + A(x-1,n-1,1:3) + A(x+1,n,1:3)) /5;
@@ -75,8 +77,7 @@ function Y = promedio(A)
             Y(x,n,:) = A(x,n,:);
         endif
     endfor
-
-
+    %Se realiza el calculo del promedio de los 8 pixeles adyacentes
     for x = 2:m-1
         for y = 2:n-1
             if or(A(x,y,1)<=0.1,A(x,y,2)<=0.1,A(x,y,3)<=0.1)
