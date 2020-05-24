@@ -10,7 +10,7 @@ function Y = promedio(A)
     %Esquina (1,1)
     x = 1;
     y = 1;
-     %Comparacion de pixeles negros 
+     %Comparacion de pixeles negros, 0.1 pixel negro
     if or(A(x,y,1)<=0.1,A(x,y,2)<=0.1,A(x,y,3)<=0.1)
         %Se promedian los 3 pixeles adyacentes
         Y(x,y,1:3) = (A(x,y+1,1:3) + A(x+1,y+1,1:3) + A(x+1,y,1:3))/3;

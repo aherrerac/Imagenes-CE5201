@@ -1,8 +1,14 @@
 clc; 
 [S,U,r,xi,f] = training();
+%S: Matriz con las imagenes de entrenaiento promediadas
+%U: Vector U de SVD de la matriz original menos los promedios
+%r: Rango de la matriz A 
+%xi: Vectores coordenados de las imagenes
+%f: Matriz promedio de caras
 
 files = glob('.\Comparar\*.png');
 
+%Calculo de los epsilon a prueaba y error
 e0 = 10;
 e1 = 11;
 
@@ -16,13 +22,14 @@ for k = 1:40
      
   image = im2double(imread(char(files(k,1))));
   
+  %Imagen menos el promedio de las caras 
   fi = image(:) -f;
-  
+  %Calculo de los vectores coordenados de la imagen anterior
   x = U(:,1:r)' * fi;
-  
+  %Calculo del epsilon 
   ef = ((fi - U(:, 1:r) * x)' * (fi - U(:, 1:r) * x)) ^ 0.5;
   
-  e = zeros(40,1);
+  ei = zeros(40,1);
   
   if ef < e1
     for l = 1:40

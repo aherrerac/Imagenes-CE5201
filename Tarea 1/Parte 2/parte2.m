@@ -33,7 +33,9 @@ subplot(1,2,1);
 imshow(nImage);
 title('Noisy Image');
 
-for r = 1:18:416
+k = [1 40:40:400 416]; 
+
+for r = k 
   %Calculo de P utilizando diferentes valores singulares
   Pr = Us(:,1:r) * Ss(1:r,1:r) * Vs(:,1:r)'; 
   %Matriz inversa de rango reducido
