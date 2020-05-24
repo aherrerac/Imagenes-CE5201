@@ -9,8 +9,8 @@ clc;
 files = glob('.\Comparar\*.png');
 
 %Calculo de los epsilon a prueaba y error
-e0 = 10;
-e1 = 11;
+e0 = 10; %Distancia maxima a cualquier imagen conocida S
+e1 = 11; %Distancia maxima al "face space"
 
 figure('Name','Mean Image');
   
@@ -26,7 +26,7 @@ for k = 1:40
   fi = image(:) -f;
   %Calculo de los vectores coordenados de la imagen anterior
   x = U(:,1:r)' * fi;
-  %Calculo del epsilon 
+  %Calculo del epsilon, distancia a cualquier imagen conocida S
   ef = ((fi - U(:, 1:r) * x)' * (fi - U(:, 1:r) * x)) ^ 0.5;
   
   ei = zeros(40,1);
