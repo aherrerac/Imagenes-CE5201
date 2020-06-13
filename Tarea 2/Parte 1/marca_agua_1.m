@@ -97,7 +97,7 @@ Wa = (Da - S)/a;
 
 subplot(2,3,6); 
 imshow(Wa);
-title('Watermark extracred'); 
+title('Watermark extracted'); 
 
 
 
