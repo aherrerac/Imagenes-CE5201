@@ -62,7 +62,7 @@ title('At');
 
 IDCT = DCT;
 
-%Cabio de F(1,1) en cada matriz de 8x8
+%Cambio de F(1,1) en cada matriz de 8x8
 for i = 1:ms
   for j = 1:ns
    DCT{i,j}(1,1) = Ap(i,j);
@@ -70,11 +70,39 @@ for i = 1:ms
   endfor
 endfor
 
+%Matriz con la imagen (Watermarked)
 Ia = cell2mat(IDCT);
 
 subplot(2,3,5);
 imshow(Ia);
-title('Watermarked Image'); 
+title('Watermarked Image');
+
+%Se realiza la extraccion de la marca de agua
+subIa = mat2cell(Ia,subVector,subVector);
+
+[msa,nsa] = size(subIa);
+Aa = zeros(ms,ns);
+
+for i = 1:msa
+  for j = 1:nsa
+   Aa(i,j) = dct(subI{i,j})(1,1);
+  endfor
+endfor
+
+[Ua,Sa,Va] = svd(Aa);
+
+Da = U1 * Sa * V1';
+
+Wa = (Da - S)/a;
+
+subplot(2,3,6); 
+imshow(Wa);
+title('Watermark extracred'); 
+
+
+
+
+
 
 
 
