@@ -7,14 +7,40 @@ subplot(1,3,1);
 imshow(O);
 title('Imagen original');
 
+%Tamano de la matriz original 
+[m,n] = size(O);
+
+sub = 4;
+
+subVector = sub * ones(1,m/4);
+
+subI = mat2cell(O,subVector,subVector);
+
+DCT = subI;
+
+[ms,ns] = size(subI);
+A = zeros(ms,ns);
+
+
+[mb,nb] = size(subI{1,1});
+temp = zeros(mb,nb);
+
+for i = 1:ms
+  for j = 1:ns
+   dctTemp = dct(subI{i,j});
+   A(i,j) = dctTemp(1,1);
+   DCT{i,j} = dctTemp;
+  endfor
+endfor
+
+[U,S,V] = svd(A);
+
 I=imread('imagen2.jpg');
 subplot(1,3,2);
 imshow(I);
 title('Imagen con ruido y marca de agua');
 
 alpha=0.1;
-
-
 
 [m,n] = size(I); %Dimensiones imagen con ruido y marca de agua
 
@@ -42,11 +68,11 @@ load('V1.mat');
 
 Da = U1 * Sa * V1';
 
-Wa = (Da - Sa)/alpha;
+Wa = (Da - S)/alpha;
 
 subplot(1,3,3); 
 imshow(Wa);
-title('Watermark extracted'); 
+title('Marca de agua'); 
 
 
 
