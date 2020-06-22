@@ -3,12 +3,12 @@ pkg load signal;
 clc; clear all;
 
 O=imread('imagen3.jpg');
-subplot(2,3,1);
+subplot(1,3,1);
 imshow(O);
 title('Imagen original');
 
 I=imread('imagen2.jpg');
-subplot(2,3,2);
+subplot(1,3,2);
 imshow(I);
 title('Imagen con ruido y marca de agua');
 
@@ -18,10 +18,10 @@ alpha=0.1;
 
 [m,n] = size(I); %Dimensiones imagen con ruido y marca de agua
 
-%Bloques 8 x 8 
-sub = 8;
+%Bloques 4 x 4 
+sub = 4;
 
-subVector = sub * ones(1,m/8);
+subVector = sub * ones(1,m/4);
 
 %Se realiza la extraccion de la marca de agua
 subIa = mat2cell(I,subVector,subVector);
@@ -37,14 +37,14 @@ endfor
 
 [Ua,Sa,Va] = svd(Aa);
 
-U1=load('U1.mat');
-V1=load('V1.mat');
+load('U1.mat');
+load('V1.mat');
 
 Da = U1 * Sa * V1';
 
-Wa = (Da - S)/alpha;
+Wa = (Da - Sa)/alpha;
 
-subplot(2,3,6); 
+subplot(1,3,3); 
 imshow(Wa);
 title('Watermark extracted'); 
 
