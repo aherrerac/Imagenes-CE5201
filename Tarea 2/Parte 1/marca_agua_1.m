@@ -85,7 +85,7 @@ Aa = zeros(ms,ns);
 
 for i = 1:msa
   for j = 1:nsa
-   Aa(i,j) = dct(subI{i,j})(1,1);
+   Aa(i,j) = dct(subIa{i,j})(1,1);
   endfor
 endfor
 
