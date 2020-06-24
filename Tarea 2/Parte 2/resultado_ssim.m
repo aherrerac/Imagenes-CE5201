@@ -39,7 +39,15 @@ ResMed1=(ResMed1/fr)*100
 ResMed3=(ResMed3/fr)*100
 
 if(ResMed1>ResMed3)
+  disp("El filtro que genera SSIM mayor es el de la mediana")
+  disp("Porcentaje")
   ResMed1
+  disp("Decimal")
+  ResMed1/100
 else
+  disp("El filtro que genera SSIM mayor es el de IAMFA-I")
+  disp("Porcentaje")
   ResMed3
+  disp("Decimal")
+  ResMed3/100
 endif
