@@ -24,30 +24,25 @@ endfor
 
 %calculando resultados de SSIM para filtro mediana y SSIM para IAMFA1
 for k=1:fr
-  [canal1, t2]=ssim(Original(:,:,1,k),Mediana1(:,:,1,k));
-  [canal2, t2]=ssim(Original(:,:,2,k),Mediana1(:,:,2,k));
-  [canal3, t2]=ssim(Original(:,:,3,k),Mediana1(:,:,3,k));
-  ResMed1+=(canal1+canal2+canal3)/3;
+  [c11, xz]=ssim(Original(:,:,1,k),Mediana1(:,:,1,k));
+  [c12, xz]=ssim(Original(:,:,2,k),Mediana1(:,:,2,k));
+  [c13, xz]=ssim(Original(:,:,3,k),Mediana1(:,:,3,k));
+  t1=(c11+c12+c13)/3;
+  ResMed1+=t1;
   
-  [canal1, t2]=ssim(Original(:,:,1,k),Mediana3(:,:,1,k));
-  [canal2, t2]=ssim(Original(:,:,2,k),Mediana3(:,:,2,k));
-  [canal3, t2]=ssim(Original(:,:,3,k),Mediana3(:,:,3,k));
-  ResMed3+=(canal1+canal2+canal3)/3;
+  [c31, xz]=ssim(Original(:,:,1,k),Mediana3(:,:,1,k));
+  [c32, xz]=ssim(Original(:,:,2,k),Mediana3(:,:,2,k));
+  [c33, xz]=ssim(Original(:,:,3,k),Mediana3(:,:,3,k));
+  t3=(c31+c32+c33)/3;
+  ResMed3+=t3;
 endfor
 
-ResMed1=(ResMed1/fr)*100
-ResMed3=(ResMed3/fr)*100
+ResMed1=(ResMed1/fr)
+ResMed3=(ResMed3/fr)
 
+disp("El filtro, promediando SSIM en todos los frames, más optimo es: ")
 if(ResMed1>ResMed3)
-  disp("El filtro que genera SSIM mayor es el de la mediana")
-  disp("Porcentaje")
   ResMed1
-  disp("Decimal")
-  ResMed1/100
 else
-  disp("El filtro que genera SSIM mayor es el de IAMFA-I")
-  disp("Porcentaje")
   ResMed3
-  disp("Decimal")
-  ResMed3/100
 endif
