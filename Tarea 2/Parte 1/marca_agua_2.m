@@ -29,7 +29,7 @@ temp = zeros(mb,nb);
 
 for i = 1:ms
   for j = 1:ns
-   dctTemp = dct(subI{i,j});
+   dctTemp = dct2(subI{i,j});
    A(i,j) = dctTemp(1,1);
    DCT{i,j} = dctTemp;
   endfor
@@ -66,7 +66,7 @@ Aa = zeros(msa,nsa);
 %Se crea Aa con la DCT de cada bloque
 for i = 1:msa
   for j = 1:nsa
-   Aa(i,j) = dct(subIa{i,j})(1,1);
+   Aa(i,j) = dct2(subIa{i,j})(1,1);
   endfor
 endfor
 
