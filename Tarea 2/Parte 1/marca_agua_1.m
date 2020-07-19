@@ -37,7 +37,7 @@ temp = zeros(mb,nb);
 for i = 1:ms
   for j = 1:ns
    %Transformada Discreta de Coseno para matriz 8x8
-   dctTemp = dct(subI{i,j});
+   dctTemp = dct2(subI{i,j});
    %Se almacena el valor F(1,1)
    A(i,j) = dctTemp(1,1);
    %Se actualizan los valores de las transformada
@@ -78,7 +78,7 @@ for i = 1:ms
    %Se extraen los nuevos valores F(1,1)  
    DCT{i,j}(1,1) = Ap(i,j);
    %Transformada inversa con datos de la marca de agua
-   IDCT{i,j} = idct(DCT{i,j});
+   IDCT{i,j} = idct2(DCT{i,j});
   endfor
 endfor
 
@@ -98,7 +98,7 @@ Aa = zeros(ms,ns);
 for i = 1:msa
   for j = 1:nsa
    %Calculo de la transformada DCT
-   Aa(i,j) = dct(subIa{i,j})(1,1);
+   Aa(i,j) = dct2(subIa{i,j})(1,1);
   endfor
 endfor
 
@@ -115,10 +115,12 @@ subplot(2,3,6);
 imshow(Wa);
 title('Watermark extracted'); 
 
+%Norma de Frobenius 
+n_original = norm(I,"fro");
+n_marca = norm(Ia,"fro");
 
-
-
-
+%Porcentaje de diferencia
+dif = ((n_marca - n_original)/n_original)*100
 
 
 
