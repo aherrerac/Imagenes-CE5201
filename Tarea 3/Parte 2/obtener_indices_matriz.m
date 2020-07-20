@@ -6,7 +6,8 @@
 clc; clear
 
 m=1000;
-A=rand(m); %Esta matriz toma valores 
+A=rand(
+m); %Esta matriz toma valores 
            %aleatorios del intervalo [0,1]
            %siguiendo una distribución uniforme
 

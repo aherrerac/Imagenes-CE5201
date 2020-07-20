@@ -26,3 +26,5 @@ B = zeros(m,n,c); %Se crea nueva matriz con zeros para cumplir condicion
 B(mask) = -30;
 B(!mask) = 30
 
+
+
