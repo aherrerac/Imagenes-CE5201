@@ -1,33 +1,22 @@
-clc; clear; close all;
-pkg load image;
+function R=inpainting(A,M)
 
-%Imagen paisaje original y marca
-O=imread('paisaje.jpg');
-M=imread('marca.jpg');
-subplot(2,2,1)
-imshow(O)
-title('(a)paisaje.jpg')
-subplot(2,2,2)
-imshow(M)
-title('(b)marca.jpg')
+[m, n, r]=size(A);
 
 
-A=generar_imagen_restaurar(O,M);
-subplot(2,2,3)
-imshow(A)
-title('(c)Imagen a restaurar')
+%Validamos si la imagen es a color o escala de grises
+if r == 1
+  % Se crea la mascara la cual es una matriz de bloques 1 x 1, con una 
+  % copia de M=marca, en cada elemento
+  mascara = repmat(M, 1);
+  R=A;
+else
+  mascara = repmat(M, [1 1 r]);
+  R = A .* (1 - M);
+endif 
 
-[m, n]=size(A);
-
-% Se crea la mascara la cual es una matriz de bloques 1 x 1, con una 
-% copia de M=marca, en cada elemento
-mascara = repmat(M, 1);
 % Se crea un vector de indices de elementos distintos a cero encontrados 
 % en la mascara
 mascaraI = find(mascara);
-
-% R=Imagen Restaurada
-R=A;
 
 % Se crean la matriz kernel de difusión con los valores de a, b y c 
 % estos valores se toman del paper
@@ -51,9 +40,4 @@ while mascaraDif > tol
     mascaraDif = mean(abs(int16(R(mascaraI)) - int16(tempImg(mascaraI))));
     R(mascaraI) = tempImg(mascaraI);
 endwhile
-
-
-subplot(2,2,4)
-imshow(R)
-title('(c)Imegen Restaurada')
     
