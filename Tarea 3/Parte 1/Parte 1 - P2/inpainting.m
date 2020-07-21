@@ -4,15 +4,18 @@ pkg load image;
 %Imagen paisaje original y marca
 O=imread('paisaje.jpg');
 M=imread('marca.jpg');
+subplot(2,2,1)
+imshow(O)
+title('(a)paisaje.jpg')
+subplot(2,2,2)
+imshow(M)
+title('(b)marca.jpg')
+
 
 A=generar_imagen_restaurar(O,M);
-subplot(1,3,1)
+subplot(2,2,3)
 imshow(A)
-title('Imagen a restaurar')
-
-subplot(1,3,2)
-imshow(M)
-title('Marca')
+title('(c)Imagen a restaurar')
 
 [m, n]=size(A);
 
@@ -50,7 +53,7 @@ while mascaraDif > tol
 endwhile
 
 
-subplot(1,3,3)
+subplot(2,2,4)
 imshow(R)
-title('Imegen restaurada')
+title('(c)Imegen Restaurada')
     
