@@ -26,6 +26,6 @@ mask(blackIdxs) = 1;
 mask = imdilate(mask, strel("diamond", 1));
 subplot(3,1,2), imshow(mask) % debug
 tic
-ret = inpainting(img, mask);
+ret = inpainting_example(img, mask);
 toc
 subplot(3,1,3), imshow(ret) % debug
