@@ -16,7 +16,7 @@ video=VideoWriter('vide_croma.mp4');
 
 tic
 for k = 1:c
-  writeVideo(video,im2uint8(parte2_p4_aux(im2double(readFrame(V_plane)),im2double(readFrame(V_sky)))));
+  writeVideo(video,parte2_p4_aux(readFrame(V_plane),readFrame(V_sky)));
 endfor
 toc
 

@@ -1,6 +1,6 @@
 function X = parte2_p4_aux(A,B);
   %Creacion de la mascara para fondos verdes
-  mask = and(A(:,:,1) <= 0.5 , A(:,:,2) >= 0.55 , A(:,:,3) <= 0.5);
+  mask = and(A(:,:,1) <= 125 , A(:,:,2) >= 135 , A(:,:,3) <= 125);
 
   new_A = A;
 
@@ -29,5 +29,5 @@ function X = parte2_p4_aux(A,B);
 
   edge = dilate&~rode;
   
-  X = inpainting(new_A,edge,0.5);
+  X = inpainting(new_A,edge);
 endfunction
