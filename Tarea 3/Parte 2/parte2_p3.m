@@ -1,4 +1,3 @@
-clc; clear;
 pkg load image
 
 %Implementacion GNO Octave del proceso de Croma
@@ -6,14 +5,17 @@ pkg load image
 
 A = imread('fondo_verde.jpg');
 
+A = im2double(A);
+
 %Creacion de mascara para croma
 
-mask = and(A(:,:,1) <= 128 , A(:,:,2) >= 130 , A(:,:,3) <= 128);
+mask = and(A(:,:,1) <= 0.5 , A(:,:,2) >= 0.55 , A(:,:,3) <= 0.5);
 
 %Realizacion del proceso de croma
 
 %Nuevo fondo de la imagen
 B = imread('playa.jpg');
+B = im2double(B);
 
 
 %Eliminacion del fondo verde(Visualizacion)
@@ -60,7 +62,7 @@ imshow(edge);
 title('(c) Gradiente Morfologica');
 
 
-inpaintin_new_A = inpainting(new_A,edge);
+inpaintin_new_A = inpainting(im2uint8(new_A),im2uint8(edge));
 
 subplot(2,2,4)
 imshow(inpaintin_new_A);
