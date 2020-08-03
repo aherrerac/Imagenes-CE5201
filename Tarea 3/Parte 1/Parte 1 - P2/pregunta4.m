@@ -19,4 +19,3 @@ R=inpainting(A,M);
 subplot(2,2,3)
 imshow(R)
 title('Imagen sin el objeto');
-imwrite(Y,'canal_1.jpg', 'quality',100);
