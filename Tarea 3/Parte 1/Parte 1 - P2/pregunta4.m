@@ -12,10 +12,11 @@ subplot(2,2,2)
 imshow(M)
 title('Objeto a eliminar')
 
-%Se llama la función inpainting que elimina el objeto
+%Se llama la funciÃ³n inpainting que elimina el objeto
 R=inpainting(A,M);
 
 %Se muestra el resultado
 subplot(2,2,3)
 imshow(R)
 title('Imagen sin el objeto');
+
